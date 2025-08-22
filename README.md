@@ -20,16 +20,10 @@ https://github.com/duyngtr16061999/KDMCSE
 https://github.com/sfi-norwai/eMargin
 ```
 
+Models in our paper?  T-Loss TST TS-TCC TNC TF-C Ti-MAE TimesURL 
+include models of mfclr and vq_mtm in the list of models
 
-UCR NonInvasiveFetalECGThorax2 EOGVerticalSignal CricketX GesturePebbleZ1
-UEA AtrialFibrillation EigenWorms MotorImagery StandWalkJump
 
-SLOT VQ-MTM
-download datasets
-Medformer datasets: APAVA, TDBrain, ADFTD, PTB, PTB-XL datasets
-NuTime datasets: SleepEDF, Epilepsy, etc. NuTime/src/data/preprocess.py
-VQ_MTM  TUSZ dataset:   VQ_MTM/data_provider/data_factory.py   TUSZ dataset
-Self-Supervised-Contrastive-Forecsating  datasets: ETTh1|ETTh2|ETTm1|ETTm2|Electricity|Traffic|Weather|Excange|Illness 
-TimeseriesContrastiveModels datasets: SleepEEG/Epilepsy/FD-A//FD-B/HAR/Gesture/ECG/EMG
-SLOTS datasets:  DEAP/SEED/EPILEPSY/HAR/P19  
-LEAD datasets: all possible ones
+mfclr                    /home/amin/anaconda3/envs/mfclr
+vq_mtm                   /home/amin/anaconda3/envs/vq_mtm
+
