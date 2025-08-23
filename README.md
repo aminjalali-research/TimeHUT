@@ -18,6 +18,7 @@ https://github.com/maxxu05/relcon (The Opportunity, PAMAP2, HHAR, and Motionsens
 https://github.com/TsingZ0/FedTGP
 https://github.com/duyngtr16061999/KDMCSE
 https://github.com/sfi-norwai/eMargin
+https://github.com/yingxiatang/FreConvNet
 ```
 
 Models in our paper?  T-Loss TST TS-TCC TNC TF-C Ti-MAE TimesURL 
