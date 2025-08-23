@@ -27,4 +27,3 @@ include models of mfclr and vq_mtm in the list of models
 
 mfclr                    /home/amin/anaconda3/envs/mfclr
 vq_mtm                   /home/amin/anaconda3/envs/vq_mtm
-
