@@ -22,8 +22,3 @@ https://github.com/yingxiatang/FreConvNet
 ```
 
 Models in our paper?  T-Loss TST TS-TCC TNC TF-C Ti-MAE TimesURL 
-include models of mfclr and vq_mtm in the list of models
-
-
-mfclr                    /home/amin/anaconda3/envs/mfclr
-vq_mtm                   /home/amin/anaconda3/envs/vq_mtm
