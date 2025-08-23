@@ -20,5 +20,3 @@ https://github.com/duyngtr16061999/KDMCSE
 https://github.com/sfi-norwai/eMargin
 https://github.com/yingxiatang/FreConvNet
 ```
-
-Models in our paper?  T-Loss TST TS-TCC TNC TF-C Ti-MAE TimesURL 
