@@ -21,8 +21,4 @@ https://github.com/sfi-norwai/eMargin
 https://github.com/yingxiatang/FreConvNet
 ```
 
-
-| Model       | Total Time | Time/Epoch | Accuracy | F1-Score |Peak GPU | FLOPs/Epoch |
- Schedular             | Accuracy| Total Time | Hyperparameters 
- ## Computational Complexity Analysis
 ## Failure Cases and Limitations of timehut
