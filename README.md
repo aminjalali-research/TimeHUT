@@ -22,3 +22,4 @@ https://github.com/yingxiatang/FreConvNet
 ```
 
 ## Failure Cases and Limitations of timehut
+metrics and computation factors, optimization in terms of lower training time
