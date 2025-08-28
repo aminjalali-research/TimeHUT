@@ -39,7 +39,7 @@ train_unified_comprehensive.py AtrialFibrillation optimized_params --loader UEA 
 train_unified_comprehensive.py Chinatown scheduler_exponential --loader UCR --scenario amc_temp --amc-instance 10.0 --amc-temporal 7.53 --amc-margin 0.3 --min-tau 0.05 --max-tau 0.76 --t-max 25 --temp-method exponential --batch-size 8 --epochs 200 --verbose
 
 
-timehut_efficiency_optimizer.py --full-optimization --epochs 200
+timehut_efficiency_optimizer.py --full-optimization --dataset Chinatown --epochs 200
 
 python train_unified_comprehensive.py Chinatown optimized_efficient --loader UCR --scenario amc_temp --amc-instance 10.0 --amc-temporal 7.53 --amc-margin 0.3 --min-tau 0.05 --max-tau 0.76 --t-max 25 --epochs 120 --batch-size 16 --temp-method polynomial_decay --temp-power 2.5 --verbose
 
