@@ -21,9 +21,6 @@ https://github.com/sfi-norwai/eMargin
 https://github.com/yingxiatang/FreConvNet
 ```
 
-## Failure Cases and Limitations of timehut
-
-
 TimeHUT (AtrialFibrillation)
 train_unified_comprehensive.py AtrialFibrillation optimized_params --loader UEA --scenario amc_temp --amc-instance 2.04 --amc-temporal 0.08 --amc-margin 0.67 --min-tau 0.26 --max-tau 0.68 --t-max 49 --epochs 200 --verbose (18.79s, .4667)
 
@@ -33,3 +30,7 @@ train_unified_comprehensive.py Chinatown scheduler_exponential --loader UCR --sc
 For ablation:
 python timehut_comprehensive_ablation_runner.py --dataset Chinatown --enable-gpu-monitoring
 python compute_enhanced_timehut_ablation_runner.py --dataset Chinatown --enable-gpu-profiling --enable-flops-counting   (output:efficiency_summary_Chinatown_20250828_201625.csv)
+
+
+Failure Cases and Limitations of timehut
+
