@@ -31,7 +31,6 @@ python timehut_comprehensive_ablation_runner.py --dataset Chinatown --enable-gpu
 python compute_enhanced_timehut_ablation_runner.py --dataset Chinatown --enable-gpu-profiling --enable-flops-counting   (output:efficiency_summary_Chinatown_20250828_201625.csv)
 
 Running all models: 
-python enhanced_metrics/enhanced_batch_runner.py --models TimesURL,SoftCLT,TimeHUT,TS2vec,CoST,CPC,TS_TCC,TLoss,TNC,TFC,MF_CLR --datasets Chinatown --timeout 300
-```
+python enhanced_metrics/all_models_runner.py --models TimesURL, SoftCLT,TimeHUT,TS2vec,CoST,CPC,TS_TCC,TLoss,TNC,TFC,MF_CLR --datasets Chinatown --timeout 300```
 Failure Cases and Limitations of timehut
 
