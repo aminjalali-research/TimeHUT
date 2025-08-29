@@ -20,7 +20,7 @@ https://github.com/duyngtr16061999/KDMCSE
 https://github.com/sfi-norwai/eMargin
 https://github.com/yingxiatang/FreConvNet
 ```
-
+```
 TimeHUT (AtrialFibrillation)
 train_unified_comprehensive.py AtrialFibrillation optimized_params --loader UEA --scenario amc_temp --amc-instance 2.04 --amc-temporal 0.08 --amc-margin 0.67 --min-tau 0.26 --max-tau 0.68 --t-max 49 --epochs 200 --verbose (18.79s, .4667)
 
@@ -32,6 +32,6 @@ python compute_enhanced_timehut_ablation_runner.py --dataset Chinatown --enable-
 
 Running all models: 
 python enhanced_metrics/enhanced_batch_runner.py --models TimesURL,SoftCLT,TimeHUT,TS2vec,CoST,CPC,TS_TCC,TLoss,TNC,TFC,MF_CLR --datasets Chinatown --timeout 300
-
+```
 Failure Cases and Limitations of timehut
 
