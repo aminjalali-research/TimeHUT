@@ -41,6 +41,10 @@ conda activate tslib && python enhanced_metrics/enhanced_batch_runner.py --model
 Our model:
 python timehut_comprehensive_ablation_runner.py --scenarios "AMC_Temperature_Cosine_AlgoOptim" "AMC_Temperature_MultiCycleCosine_AlgoOptim" "AMC_Temperature_MomentumAdaptive_AlgoOptim" --epochs 200
 
+PyHopper Strategy for TimeHUT:
+
+Quick test: --search-steps 15 , --search-steps 25,  --search-steps 40 
+
 
 Dataset
          TimeHUT TS2Vec   TNC   TS-TCC  T-Loss   TST  TF-C
