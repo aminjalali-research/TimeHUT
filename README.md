@@ -28,34 +28,23 @@ train_unified_comprehensive.py Chinatown scheduler_exponential --loader UCR --sc
 
 For ablation:
 python timehut_comprehensive_ablation_runner.py --dataset Chinatown --enable-gpu-monitoring
+/home/amin/anaconda3/envs/tslib/bin/python timehut_comprehensive_ablation_runner.py --dataset AtrialFibrillation --enable-gpu-monitoring
+
 python compute_enhanced_timehut_ablation_runner.py --dataset Chinatown --enable-gpu-profiling --enable-flops-counting   (output:efficiency_summary_Chinatown_20250828_201625.csv)
 
 Running all models: 
 source activate tslib && python enhanced_metrics/all_models_runner.py --models TimeHUT_Top1,TimeHUT_Top2,TimeHUT_Top3,TS2vec,TimesURL,SoftCLT,CoST,CPC,TFC,TS_TCC,TLoss,TNC,MF_CLR --datasets Chinatown --timeout 300
+
+conda activate tslib && python enhanced_metrics/enhanced_batch_runner.py --models BIOT,Ti_MAE,SimMTM,TFC,TimeHUT,VQ_MTM,MF_CLR,DCRNN,TS2vec,CoST,TS_TCC,TLoss,TimesURL,TNC --datasets AtrialFibrillation --timeout 200
 ```
-Failure Cases and Limitations of timehut
 
 Our model:
 python timehut_comprehensive_ablation_runner.py --scenarios "AMC_Temperature_Cosine_AlgoOptim" "AMC_Temperature_MultiCycleCosine_AlgoOptim" "AMC_Temperature_MomentumAdaptive_AlgoOptim" --epochs 200
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Dataset
+         TimeHUT TS2Vec   TNC   TS-TCC  T-Loss   TST  TF-C
+AF       0.53   0.200    0.133   0.267  0.200   0.067  0.200
 
 
 
