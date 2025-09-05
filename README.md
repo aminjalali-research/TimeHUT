@@ -26,7 +26,7 @@ train_unified_comprehensive.py AtrialFibrillation optimized_params --loader UEA 
 
 train_unified_comprehensive.py Chinatown scheduler_exponential --loader UCR --scenario amc_temp --amc-instance 10.0 --amc-temporal 7.53 --amc-margin 0.3 --min-tau 0.05 --max-tau 0.76 --t-max 25 --temp-method exponential --batch-size 8 --epochs 200 --verbose
 
-For ablation:
+For TimeHUT ablation:
 python timehut_comprehensive_ablation_runner.py --dataset Chinatown --enable-gpu-monitoring
 /home/amin/anaconda3/envs/tslib/bin/python timehut_comprehensive_ablation_runner.py --dataset AtrialFibrillation --enable-gpu-monitoring
 
@@ -42,8 +42,7 @@ Our model:
 python timehut_comprehensive_ablation_runner.py --scenarios "AMC_Temperature_Cosine_AlgoOptim" "AMC_Temperature_MultiCycleCosine_AlgoOptim" "AMC_Temperature_MomentumAdaptive_AlgoOptim" --epochs 200
 
 PyHopper Strategy for TimeHUT:
-
-Quick test: --search-steps 15 , --search-steps 25,  --search-steps 40 
+python enhanced_metrics/timehut_comprehensive_ablation_runner.py  --dataset AtrialFibrillation --enable-gpu-monitoring  --scenario AMC_PyHopper_BEST_46_67  --epochs 300
 
 
 Dataset
