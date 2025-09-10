@@ -49,6 +49,5 @@ Dataset
          TimeHUT TS2Vec   TNC   TS-TCC  T-Loss   TST  TF-C
 AF       0.53   0.200    0.133   0.267  0.200   0.067  0.200
 
-
-
+Use the efficient version of TimeHUT, less flops and gpu memory, use optimized configuration for both AMC, then from that initial config optimize all param including each scheduler params
 
