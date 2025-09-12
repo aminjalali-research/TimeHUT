@@ -51,3 +51,27 @@ AF       0.53   0.200    0.133   0.267  0.200   0.067  0.200
 
 Use the efficient version of TimeHUT, less flops and gpu memory, use optimized configuration for both AMC, then from that initial config optimize all param including each scheduler params
 
+
+
+Practice talking frameworks: 1 thing, 2 types, 3 steps
+They consider you as trainer!!! Damn frustrating!
+
+run  each model and part in a separated file and put a proper name for it, use "edit" mode not "agent". solve one problem at the time. Never "agent" mode.
+
+- no emoji and give root address instead of using my name
+- prepare a chechlist and alway follow it
+- Create doc folder (all documents), .github (all the initializations), separate files for documentation (put correct names for them and when you want to reuse does not occupy your window context)
+how to code that does not destroy the other parts?
+
+
+
+
+
+
+
+
+
+
+
+
+
