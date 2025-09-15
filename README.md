@@ -62,6 +62,7 @@ run  each model and part in a separated file and put a proper name for it, use "
 - prepare a chechlist and alway follow it
 - Create doc folder (all documents), .github (all the initializations), separate files for documentation (put correct names for them and when you want to reuse does not occupy your window context)
 how to code that does not destroy the other parts?
+Docs folder: Bug_tracking.md, Implementation.md, Project_structure.md, UI_UX_doc.md
 
 
 
