@@ -7,6 +7,7 @@ https://github.com/BorealisAI/ssl-for-timeseries (128 UCR, 30 UEA, 3 ETT dataset
 https://github.com/findalexli/TimeseriesContrastiveModels (CLOCS Mixing-up SimCLR TS-TCC	TS2Vec TFC   SleepEEG/Epilepsy/FD-A//FD-B/HAR/Gesture/ECG/EMG)
 https://github.com/DL4mHealth/SLOTS (SLOTS/Mixing-up/SimCLR/TS-TCC/TS2Vec/TFC       DEAP/SEED/EPILEPSY/HAR/P19)  
 https://github.com/DL4mHealth/LEAD/ (GREAT)
+https://github.com/JiaW6122/PLanTS/
 
 https://github.com/lanxiang1017/DynamicBadPairMining_ICLR24
 https://github.com/blacksnail789521/TimeDRL
