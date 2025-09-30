@@ -1,73 +1,298 @@
+# TimeHUT 
+
+
+---
+
+
+#### Basic AMC Training
+```bash
+#  WORKS: Basic TimeHUT with AMC and temperature scheduling
+
+python train_unified_comprehensive.py Chinatown test_run \
+    --loader UCR --scenario amc_temp \
+    --amc-instance 1.0 --amc-temporal 0.5 --epochs 50
+
 ```
-https://github.com/DL4mHealth/Medformer (APAVA, TDBrain, ADFTD, PTB, PTB-XL datasets, 10 models Transformers)
-https://github.com/chenguolin/NuTime  (UCR, UEA, SleepEDF, Epilepsy, etc. NuTime/src/data/preprocess.py
-https://github.com/HaokunGUI/VQ_MTM  (VQ_MTM/models/    VQ_MTM/data_provider/data_factory.py   TUSZ dataset)
-https://github.com/junwoopark92/Self-Supervised-Contrastive-Forecsating  ETTh1|ETTh2|ETTm1|ETTm2|Electricity|Traffic|Weather|Excange|Illness 10 models)
-https://github.com/BorealisAI/ssl-for-timeseries (128 UCR, 30 UEA, 3 ETT datasets, Electricity, KPI dataset, knows how to submit jobs to slurm)
-https://github.com/findalexli/TimeseriesContrastiveModels (CLOCS Mixing-up SimCLR TS-TCC	TS2Vec TFC   SleepEEG/Epilepsy/FD-A//FD-B/HAR/Gesture/ECG/EMG)
-https://github.com/DL4mHealth/SLOTS (SLOTS/Mixing-up/SimCLR/TS-TCC/TS2Vec/TFC       DEAP/SEED/EPILEPSY/HAR/P19)  
-https://github.com/DL4mHealth/LEAD/ (GREAT)
-https://github.com/JiaW6122/PLanTS/
 
-https://github.com/lanxiang1017/DynamicBadPairMining_ICLR24
-https://github.com/blacksnail789521/TimeDRL
-https://github.com/LiuZH-19/CTRL (128 UCR, 30 UEA, 3 ETT datasets, Exchange, Wind, ILI, Weather)
-https://github.com/yurui12138/TS-DRC
-https://github.com/theabrusch/Multiview_TS_SSL
-https://github.com/maxxu05/relcon (The Opportunity, PAMAP2, HHAR, and Motionsense datasets 
 
-https://github.com/TsingZ0/FedTGP
-https://github.com/duyngtr16061999/KDMCSE
-https://github.com/sfi-norwai/eMargin
-https://github.com/yingxiatang/FreConvNet
+#### Ablation Study 
+```bash
+
+python ../../enhanced_metrics/timehut_comprehensive_ablation_runner.py \
+    --dataset Chinatown --enable-gpu-monitoring --epochs 100
+
 ```
+
+#### Unified Pipeline
+```bash
+python -m unified.master_benchmark_pipeline --models TimeHUT --datasets Chinatown --batch-size 8 --force-epochs 10 --timeout 300
+
 ```
-TimeHUT (AtrialFibrillation)
-train_unified_comprehensive.py AtrialFibrillation optimized_params --loader UEA --scenario amc_temp --amc-instance 2.04 --amc-temporal 0.08 --amc-margin 0.67 --min-tau 0.26 --max-tau 0.68 --t-max 49 --epochs 200 --verbose (18.79s, .4667)
+python train_unified_comprehensive.py Chinatown optimized_efficient \
+    --loader UCR --scenario amc_temp \
+    --amc-instance 10.0 --amc-temporal 7.53 --amc-margin 0.3 \
+    --min-tau 0.05 --max-tau 0.76 --t-max 25 \
+    --epochs 120 --batch-size 16 \
+    --temp-method polynomial_decay --temp-power 2.5 --verbose
 
-train_unified_comprehensive.py Chinatown scheduler_exponential --loader UCR --scenario amc_temp --amc-instance 10.0 --amc-temporal 7.53 --amc-margin 0.3 --min-tau 0.05 --max-tau 0.76 --t-max 25 --temp-method exponential --batch-size 8 --epochs 200 --verbose
+```
 
-For TimeHUT ablation:
+#### **GPU Monitoring Options**
+```bash
+# Enable GPU monitoring (requires pynvml)
 python timehut_comprehensive_ablation_runner.py --dataset Chinatown --enable-gpu-monitoring
-/home/amin/anaconda3/envs/tslib/bin/python timehut_comprehensive_ablation_runner.py --dataset AtrialFibrillation --enable-gpu-monitoring
 
-python compute_enhanced_timehut_ablation_runner.py --dataset Chinatown --enable-gpu-profiling --enable-flops-counting   (output:efficiency_summary_Chinatown_20250828_201625.csv)
+# Disable GPU monitoring
+python timehut_comprehensive_ablation_runner.py --dataset Chinatown
 
-Running all models: 
-source activate tslib && python enhanced_metrics/all_models_runner.py --models TimeHUT_Top1,TimeHUT_Top2,TimeHUT_Top3,TS2vec,TimesURL,SoftCLT,CoST,CPC,TFC,TS_TCC,TLoss,TNC,MF_CLR --datasets Chinatown --timeout 300
-
-conda activate tslib && python enhanced_metrics/enhanced_batch_runner.py --models BIOT,Ti_MAE,SimMTM,TFC,TimeHUT,VQ_MTM,MF_CLR,DCRNN,TS2vec,CoST,TS_TCC,TLoss,TimesURL,TNC --datasets AtrialFibrillation --timeout 200
+# Disable GFLOPs estimation
+python timehut_comprehensive_ablation_runner.py --dataset Chinatown --disable-flops-estimation
 ```
 
-Our model:
-python timehut_comprehensive_ablation_runner.py --scenarios "AMC_Temperature_Cosine_AlgoOptim" "AMC_Temperature_MultiCycleCosine_AlgoOptim" "AMC_Temperature_MomentumAdaptive_AlgoOptim" --epochs 200
+### 2. Required Dependencies
+```bash
+# Install core dependencies (if needed)
+pip install torch torchvision numpy scipy scikit-learn pandas matplotlib seaborn
+pip install jupyter notebook tqdm psutil
 
-PyHopper Strategy for TimeHUT:
-python enhanced_metrics/timehut_comprehensive_ablation_runner.py  --dataset AtrialFibrillation --enable-gpu-monitoring  --scenario AMC_PyHopper_BEST_46_67  --epochs 300
+# Optional optimization libraries
+pip install optuna pyhopper neptune-client
+```
+
+#### Individual AMC Configuration Tests
+```bash
+# Test baseline (no AMC)
+/home/anaconda3/envs/tslib/bin/python train_with_amc.py Chinatown baseline \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 0.0 --amc-temporal 0.0 --amc-margin 0.5 \
+    --seed 42 --eval --dataroot /home/TSlib/datasets
+
+# Test instance AMC only
+/home/anaconda3/envs/tslib/bin/python train_with_amc.py Chinatown instance_only \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 1.0 --amc-temporal 0.0 --amc-margin 0.5 \
+    --seed 42 --eval --dataroot /home/TSlib/datasets
+
+# Test temporal AMC only  
+/home/anaconda3/envs/tslib/bin/python train_with_amc.py Chinatown temporal_only \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 0.0 --amc-temporal 1.0 --amc-margin 0.5 \
+    --seed 42 --eval --dataroot /home/TSlib/datasets
+
+# Test both AMC components
+/home/anaconda3/envs/tslib/bin/python train_with_amc.py Chinatown both_amc \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 1.0 --amc-temporal 1.0 --amc-margin 0.5 \
+    --seed 42 --eval --dataroot /home/TSlib/datasets
+```
 
 
-Dataset
-         TimeHUT TS2Vec   TNC   TS-TCC  T-Loss   TST  TF-C
-AF       0.53   0.200    0.133   0.267  0.200   0.067  0.200
+```
 
-Use the efficient version of TimeHUT, less flops and gpu memory, use optimized configuration for both AMC, then from that initial config optimize all param including each scheduler params
+### 🔍 Debug and Investigation Commands
+```bash
+# Verify unified script functionality
 
-
-
-Practice talking frameworks: 1 thing, 2 types, 3 steps
-They consider you as trainer!!! Damn frustrating!
-
-run  each model and part in a separated file and put a proper name for it, use "edit" mode not "agent". solve one problem at the time. Never "agent" mode.
-
-- no emoji and give root address instead of using my name
-- prepare a chechlist and alway follow it
-- Create doc folder (all documents), .github (all the initializations), separate files for documentation (put correct names for them and when you want to reuse does not occupy your window context)
-how to code that does not destroy the other parts?
-Docs folder: Bug_tracking.md, Implementation.md, Project_structure.md, UI_UX_doc.md
+/home//anaconda3/envs/tslib/bin/python train_unified_comprehensive.py --help
 
 
+# Test basic training with verbose output
+/home/anaconda3/envs/tslib/bin/python train_unified_comprehensive.py Chinatown debug_run \
+    --loader UCR --scenario amc_temp \
+    --amc-instance 1.0 --amc-temporal 0.5 --epochs 5 --verbose
+```
+
+#### **Basic Scheduler Comparison**
+Use the same hyperparameters for fair comparison:
+```bash
 
 
+# Base configuration (Chinatown optimized parameters):
+BASE_PARAMS="--loader UCR --scenario amc_temp --amc-instance 10.0 --amc-temporal 7.53 --amc-margin 0.3 --min-tau 0.05 --max-tau 0.76 --t-max 25 --batch-size 8 --epochs 100 --verbose"
+
+# Test cosine annealing (baseline)
+/home/anaconda3/envs/tslib/bin/python train_unified_comprehensive.py Chinatown scheduler_cosine_annealing $BASE_PARAMS --temp-method cosine_annealing
+
+# Test linear decay
+/home/anaconda3/envs/tslib/bin/python train_unified_comprehensive.py Chinatown scheduler_linear_decay $BASE_PARAMS --temp-method linear_decay
+
+# Test exponential decay
+/home/anaconda3/envs/tslib/bin/python train_unified_comprehensive.py Chinatown scheduler_exponential_decay $BASE_PARAMS --temp-method exponential_decay --temp-decay-rate 0.95
+
+# Test step decay
+/home/anaconda3/envs/tslib/bin/python train_unified_comprehensive.py Chinatown scheduler_step_decay $BASE_PARAMS --temp-method step_decay --temp-step-size 8 --temp-gamma 0.5
+
+# Test polynomial decay
+/home/anaconda3/envs/tslib/bin/python train_unified_comprehensive.py Chinatown scheduler_polynomial_decay $BASE_PARAMS --temp-method polynomial_decay --temp-power 2.0
+
+# Test sigmoid decay
+/home/anaconda3/envs/tslib/bin/python train_unified_comprehensive.py Chinatown scheduler_sigmoid_decay $BASE_PARAMS --temp-method sigmoid_decay --temp-steepness 1.0
+
+# Test constant temperature
+/home/anaconda3/envs/tslib/bin/python train_unified_comprehensive.py Chinatown scheduler_constant $BASE_PARAMS --temp-method constant
+```
+#### **Baseline Benchmark (Establish Performance Metrics)**
+```bash
+cd /home/TSlib/models/timehut
+
+# Quick baseline test (50 epochs)
+python timehut_efficiency_optimizer.py --baseline-only --epochs 50
+
+# Full baseline benchmark (200 epochs)
+python timehut_efficiency_optimizer.py --baseline-only --epochs 200
+```
+
+#### **Verification Test**
+```bash
+# Test the optimized configuration
+python train_unified_comprehensive.py Chinatown efficiency_verification \
+    --loader UCR --scenario amc_temp --seed 2002 \
+    --amc-instance 2.0 --amc-temporal 2.0 --amc-margin 0.5 \
+    --min-tau 0.15 --max-tau 0.95 --t-max 25.0 \
+    --batch-size 16 --epochs 120 \
+    --temp-method polynomial_decay --temp-power 2.5
+
+```
+
+####  Basic TimeHUT Test 
+```bash
+python -m unified.master_benchmark_pipeline --models TimeHUT --datasets Chinatown --batch-size 8 --force-epochs 10 --timeout 300
+```
+
+####  Direct TimeHUT Training 
+```bash
+python train_with_amc.py Chinatown test_run \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 0.5 --amc-temporal 0.5 --amc-margin 0.5 \
+    --seed 42 --eval --dataroot /home/datasets
+```
+
+# TimeHUT Model 
+
+
+### Basic TimeHUT Training with AMC
+```bash
+# Basic TimeHUT with AMC and temperature scheduling
+python train_unified_comprehensive.py dataset_name test_run \
+    --loader UCR --scenario amc_temp \
+    --amc-instance 1.0 --amc-temporal 0.5 --epochs 200
+```
+
+```bash
+python train_unified_comprehensive.py dataset_name optimized_efficient \
+    --loader UCR --scenario amc_temp \
+    --amc-instance 10.0 --amc-temporal 7.53 --amc-margin 0.3 \
+    --min-tau 0.05 --max-tau 0.76 --t-max 25 \
+    --epochs 200 --batch-size 8 \
+    --temp-method polynomial_decay --temp-power 2.5 --verbose
+```
+
+### Core Dependencies
+```bash
+pip install torch torchvision numpy scipy scikit-learn pandas matplotlib seaborn
+pip install jupyter notebook tqdm psutil
+```
+
+### Ablation Studies
+```bash
+# Comprehensive ablation study with GPU monitoring
+python ../../enhanced_metrics/timehut_comprehensive_ablation_runner.py \
+    --dataset dataname --enable-gpu-monitoring --epochs 200
+```
+
+### Unified Pipeline
+```bash
+python -m unified.master_benchmark_pipeline \
+    --models TimeHUT --datasets dataname \
+    --batch-size 8 --force-epochs 200 
+```
+
+### Individual AMC Configuration Tests
+```bash
+# Test baseline (no AMC)
+python train_with_amc.py dataname baseline \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 0.0 --amc-temporal 0.0 --amc-margin 0.5 \
+    --seed 42 --eval
+
+# Test instance AMC only
+python train_with_amc.py dataname instance_only \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 1.0 --amc-temporal 0.0 --amc-margin 0.5 \
+    --seed 42 --eval
+
+# Test temporal AMC only  
+python train_with_amc.py dataname temporal_only \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 0.0 --amc-temporal 1.0 --amc-margin 0.5 \
+    --seed 42 --eval
+
+# Test both AMC components
+python train_with_amc.py dataname both_amc \
+    --loader UCR --batch-size 8 --iters 50 \
+    --amc-instance 1.0 --amc-temporal 1.0 --amc-margin 0.5 \
+    --seed 42 --eval
+```
+
+##  Temperature Scheduler Comparison
+
+Use the same hyperparameters for fair comparison:
+
+```bash
+# Base configuration (dataname optimized parameters)
+BASE_PARAMS="--loader UCR --scenario amc_temp --amc-instance 10.0 --amc-temporal 7.53 --amc-margin 0.3 --min-tau 0.05 --max-tau 0.76 --t-max 25 --batch-size 8 --epochs 100 --verbose"
+
+# Test different schedulers
+python train_unified_comprehensive.py dataname scheduler_cosine_annealing $BASE_PARAMS --temp-method cosine_annealing
+python train_unified_comprehensive.py dataname scheduler_linear_decay $BASE_PARAMS --temp-method linear_decay
+python train_unified_comprehensive.py dataname scheduler_exponential_decay $BASE_PARAMS --temp-method exponential_decay --temp-decay-rate 0.95
+python train_unified_comprehensive.py dataname scheduler_polynomial_decay $BASE_PARAMS --temp-method polynomial_decay --temp-power 2.0
+```
+
+##  GPU Monitoring Options
+
+```bash
+# Enable GPU monitoring (requires pynvml)
+python timehut_comprehensive_ablation_runner.py --dataset dataname --enable-gpu-monitoring
+
+# Disable GPU monitoring
+python timehut_comprehensive_ablation_runner.py --dataset dataname
+
+# Disable GFLOPs estimation
+python timehut_comprehensive_ablation_runner.py --dataset dataname --disable-flops-estimation
+```
+
+##  Debug and Investigation
+
+```bash
+# Verify unified script functionality
+python train_unified_comprehensive.py --help
+
+# Test basic training with verbose output
+python train_unified_comprehensive.py dataname debug_run \
+    --loader UCR --scenario amc_temp \
+    --amc-instance 1.0 --amc-temporal 0.5 --epochs 5 --verbose
+```
+
+##  Baseline Benchmark
+
+```bash
+# Quick baseline test (50 epochs)
+python timehut_efficiency_optimizer.py --baseline-only --epochs 50
+
+# Full baseline benchmark (200 epochs)
+python timehut_efficiency_optimizer.py --baseline-only --epochs 200
+```
+
+```bash
+# Test the optimized configuration
+python train_unified_comprehensive.py dataname efficiency_verification \
+    --loader UCR --scenario amc_temp --seed 2002 \
+    --amc-instance 2.0 --amc-temporal 2.0 --amc-margin 0.5 \
+    --min-tau 0.15 --max-tau 0.95 --t-max 25.0 \
+    --batch-size 8 --epochs 120 \
+    --temp-method polynomial_decay --temp-power 2.5
+```
 
 
 
